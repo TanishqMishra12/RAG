@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-document-assistant"
+version = "1.0.0"
+description = "Event-Driven RAG Document Assistant"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+    {name = "Tanishq Mishra", email = "tanishqmishra12@users.noreply.github.com"}
+]
+keywords = ["rag", "llm", "pdf", "vector-database", "event-driven"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/TanishqMishra12/RAG"
+Repository = "https://github.com/TanishqMishra12/RAG"
+
+[tool.black]
+line-length = 100
+target-version = ['py313']
+
+[tool.isort]
+profile = "black"
+line_length = 100
