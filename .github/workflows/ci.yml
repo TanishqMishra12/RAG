@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install black isort flake8
+    
+    - name: Check code formatting with black
+      run: black --check backend/ frontend/
+      continue-on-error: true
+    
+    - name: Check import sorting with isort
+      run: isort --check-only backend/ frontend/
+      continue-on-error: true
+    
+    - name: Lint with flake8
+      run: flake8 backend/ frontend/ --max-line-length=100 --count --statistics
+      continue-on-error: true
+
+  syntax-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Check Python syntax
+      run: |
+        python -m py_compile backend/app/config.py
+        python -m py_compile backend/app/models/schemas.py
+        python -m py_compile backend/app/services/document_processor.py
+        python -m py_compile backend/app/services/vector_store.py
+        python -m py_compile backend/app/services/rag_service.py
+        python -m py_compile backend/app/services/inngest_service.py
+        python -m py_compile backend/app/api/routes.py
+        python -m py_compile backend/app/main.py
+        python -m py_compile frontend/app.py
