@@ -1,5 +1,6 @@
-Project Title: Event-Driven RAG Document Assistant
-1. Short Summary (Elevator Pitch)
+Event-Driven RAG Document Assistant
+
+
 A robust, local Retrieval-Augmented Generation (RAG) application that allows users to upload PDF documents and interactively ask questions about their content. Built with a focus on reliability and scalability, the project leverages Inngest for event-driven workflow orchestration, Qdrant (via Docker) for vector storage, and OpenAI for intelligent response generation.
 
 2. Key Features
